@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+jest.mock('../../../api/rotas/fornecedores/TabelaFornecedor')
 const Fornecedor = require('../../../api/rotas/fornecedores/Fornecedor')
 
 describe('classe fornecedor', () => {
@@ -10,5 +11,17 @@ describe('classe fornecedor', () => {
     })
 
     expect(fornecedor.validar()).toBe(true)
+  })
+
+  test('criar() foi executado com sucesso', async () => {
+    const fornecedor = new Fornecedor({
+      empresa: 'Gatito',
+      email: 'contato@gatito.com.br',
+      categoria: 'brinquedos'
+    })
+
+    await fornecedor.criar()
+
+    expect(fornecedor.id).toBe(99)
   })
 })
